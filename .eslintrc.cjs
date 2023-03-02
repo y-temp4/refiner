@@ -1,31 +1,15 @@
 /** @type {import("eslint").Linter.Config} */
 const config = {
-  overrides: [
-    {
-      extends: [
-        "plugin:@typescript-eslint/recommended-requiring-type-checking",
-      ],
-      files: ["*.ts", "*.tsx"],
-      parserOptions: {
-        project: "tsconfig.json",
-      },
-    },
-  ],
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    project: "./tsconfig.json",
-  },
-  plugins: ["@typescript-eslint"],
-  extends: ["next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  extends: ['next/core-web-vitals', 'prettier'],
+  plugins: ['@typescript-eslint', 'simple-import-sort', 'import'],
   rules: {
-    "@typescript-eslint/consistent-type-imports": [
-      "warn",
-      {
-        prefer: "type-imports",
-        fixStyle: "inline-type-imports",
-      },
-    ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
   },
-};
+}
 
-module.exports = config;
+module.exports = config

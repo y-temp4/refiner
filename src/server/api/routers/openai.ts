@@ -15,12 +15,12 @@ export const openaiRouter = createTRPCRouter({
           code: 'BAD_REQUEST',
         })
       }
-      // await new Promise((resolve) => setTimeout(resolve, 500))
-      // const { generatedCode, langCode } = {
-      //   generatedCode: 'sample code',
-      //   langCode: 'typescript',
-      // }
-      const { generatedCode, langCode } = await generateImprovedCode(input.code)
+      await new Promise((resolve) => setTimeout(resolve, 500))
+      const { generatedCode, langCode } = {
+        generatedCode: 'sample code',
+        langCode: 'typescript',
+      }
+      // const { generatedCode, langCode } = await generateImprovedCode(input.code)
       if (!generatedCode) {
         throw new TRPCError({
           message: 'No Generated Code.',

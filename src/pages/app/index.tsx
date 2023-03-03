@@ -1,6 +1,7 @@
 import { ActionIcon, Button, Flex, Select, Stack, Tooltip } from '@mantine/core'
 import Editor from '@monaco-editor/react'
 import { IconClipboardCopy } from '@tabler/icons-react'
+import Head from 'next/head'
 import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 
@@ -79,7 +80,10 @@ export default function AppIndex() {
   }
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>App | Refiner</title>
+      </Head>
       <Flex>
         <Stack style={{ width: '49vw' }}>
           <div className="h-8"></div>
@@ -91,7 +95,7 @@ export default function AppIndex() {
               defaultValue=""
               theme="vs-dark"
               onChange={handleEditorOnChange}
-              options={{ wordWrap: 'on' }}
+              options={{ fontSize: 14, wordWrap: 'on' }}
               onMount={handleEditorOnMount}
             />
             <div
@@ -101,12 +105,12 @@ export default function AppIndex() {
                 display: 'none',
                 whiteSpace: 'pre-wrap',
                 top: 0,
-                left: 65,
+                left: 67,
                 color: 'white',
                 pointerEvents: 'none',
                 userSelect: 'none',
                 fontFamily: `Menlo, Monaco, "Courier New", monospace`,
-                fontSize: 12,
+                fontSize: 14,
               }}
             >
               {placeholder}
@@ -158,11 +162,11 @@ export default function AppIndex() {
             defaultValue=""
             theme="vs-dark"
             value={generatedCode}
-            options={{ wordWrap: 'on', readOnly: true }}
+            options={{ fontSize: 14, wordWrap: 'on', readOnly: true }}
           />
         </Stack>
       </Flex>
-    </div>
+    </>
   )
 }
 

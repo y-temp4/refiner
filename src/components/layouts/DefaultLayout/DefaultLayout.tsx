@@ -13,7 +13,7 @@ export const DefaultLayout = ({ children }: Props) => {
   const { currentUser } = useCurrentUser()
   const AppHeader = () => {
     return (
-      <Header height={60} px="md" className="p-4">
+      <Header height={60} className="flex px-4">
         <Group>
           <Link href="/" className="text-xl font-bold text-white no-underline">
             Refiner

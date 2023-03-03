@@ -10,7 +10,10 @@ import { programmingLanguageList } from '~/utils/constant'
 export default function AppIndex() {
   const [code, setCode] = useState('')
   const [generatedCode, setGeneratedCode] = useState('')
-  const [copyTooltipLabel, setCopyTooltipLabel] = useState('Copy to clipboard')
+  const defaultCopyTooltipLabel = 'Copy to clipboard'
+  const [copyTooltipLabel, setCopyTooltipLabel] = useState(
+    defaultCopyTooltipLabel
+  )
   const [programmingLanguageCode, setProgrammingLanguageCode] = useState<
     string | null
   >('typescript')
@@ -45,8 +48,8 @@ export default function AppIndex() {
     }
     execCopy(value)
     setCopyTooltipLabel('Copied!')
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    setCopyTooltipLabel('Copy to clipboard')
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+    setCopyTooltipLabel(defaultCopyTooltipLabel)
   }
   const EDITOR_HEIGHT = 'calc(100vh - 250px)'
   return (
@@ -88,7 +91,14 @@ export default function AppIndex() {
         <Stack style={{ width: '49vw' }}>
           <Flex className="h-8" justify="center">
             {generatedCode && (
-              <Tooltip label={copyTooltipLabel}>
+              <Tooltip
+                label={copyTooltipLabel}
+                color={
+                  defaultCopyTooltipLabel === copyTooltipLabel
+                    ? undefined
+                    : 'blue'
+                }
+              >
                 <ActionIcon onClick={() => handleCopy(generatedCode)}>
                   <IconClipboardCopy />
                 </ActionIcon>

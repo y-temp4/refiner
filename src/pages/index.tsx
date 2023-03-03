@@ -249,7 +249,7 @@ function HeroText() {
           <Text component="span" className={classes.highlight} inherit>
             code generation
           </Text>{' '}
-          for any stack
+          for Developers
         </Title>
 
         <Container p={0} size={600}>
@@ -388,8 +388,7 @@ export function FeaturesCards() {
       </Title>
 
       <Text c="dimmed" className={classes.description} ta="center" mt="md">
-        Every once in a while, you’ll see a Golbat that’s missing some fangs.
-        This happens when hunger drives it to try biting a Steel-type Pokémon.
+        Refiner is a service that uses the power of AI to make code better.
       </Text>
 
       <SimpleGrid
@@ -415,6 +414,12 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <HeroText />
         <FeaturesCards />
+        <Text c="dimmed" ta="center" mt="md">
+          Refiner is currently in alpha version. Please note that there is a
+          limit to the number of registered users. <br />
+          Please also note that there may be disruptive changes to the service
+          specifications.
+        </Text>
         <Button size="lg" onClick={() => signIn()} className="my-10">
           {`Let's generate code with AI`}
         </Button>

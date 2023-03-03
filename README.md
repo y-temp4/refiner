@@ -16,7 +16,7 @@ The open-source Refraction alternative.
 
 ```sh
 # Clone the repo
-git clone https://github.com/y-temp4/refiner
+y
 
 # Go to the project folder
 cd refiner
@@ -25,6 +25,11 @@ cd refiner
 yarn
 
 # Set up .env files
-# Please setup github keys
+# Please setup github keys and OpenAPI keys
 cp .env.sample .env
+
+# Start dev server
+yarn dev
 ```
+
+Then you can access [http://localhost:3000](http://localhost:3000).

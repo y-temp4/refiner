@@ -228,6 +228,7 @@ export default function AppIndex() {
               href="https://github.com/y-temp4/refiner/issues"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-white"
             >
               Issues on GitHub
             </a>

@@ -1,18 +1,37 @@
 import '~/styles/globals.css'
 
 import { MantineProvider } from '@mantine/core'
-import { type AppType } from 'next/app'
+import type { NextPage } from 'next'
+import { type AppProps } from 'next/app'
 import Head from 'next/head'
 import { type Session } from 'next-auth'
 import { SessionProvider } from 'next-auth/react'
+import { useMemo } from 'react'
 
+import { DefaultLayout } from '~/components/layouts/DefaultLayout'
 import { api } from '~/utils/api'
 
-const MyApp: AppType<{ session: Session | null }> = ({
+type CustomNextPage = NextPage & {
+  getLayout?: (page: React.ReactElement) => React.ReactNode
+}
+
+type CustomAppProps = {
+  Component: CustomNextPage
+} & AppProps<{
+  session: Session | null
+}>
+
+const MyApp = ({
   Component,
   pageProps: { session, ...pageProps },
-}) => {
+}: CustomAppProps) => {
   const colorScheme = 'dark'
+  const getLayout = useMemo(
+    () =>
+      Component.getLayout ??
+      ((page: any) => <DefaultLayout>{page}</DefaultLayout>),
+    [Component.getLayout]
+  )
 
   return (
     <>
@@ -29,7 +48,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
           withNormalizeCSS
           theme={{ colorScheme }}
         >
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </MantineProvider>
       </SessionProvider>
     </>

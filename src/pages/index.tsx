@@ -283,8 +283,8 @@ function HeroText() {
   )
 }
 
-export function FeaturesCards() {
-  const mockdata = [
+function FeaturesCards() {
+  const data = [
     {
       title: 'Try it for free',
       description: 'The first three trials are free of charge.',
@@ -298,7 +298,8 @@ export function FeaturesCards() {
     },
     {
       title: 'Privacy focused',
-      description: 'We do not retain user data.',
+      description:
+        'Refiner does not retain information about the codes entered by the user.',
       icon: IconUser,
     },
     {
@@ -308,7 +309,20 @@ export function FeaturesCards() {
     },
     {
       title: 'We love open source ❤️',
-      description: `All code can be found in the GitHub repository.`,
+      description: (
+        <>
+          Refiner is an OSS service. All code can be found in{' '}
+          <a
+            href="https://github.com/y-temp4/refiner"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-white"
+          >
+            the GitHub repository
+          </a>
+          .,
+        </>
+      ),
       icon: IconBrandOpenSource,
     },
   ]
@@ -360,7 +374,7 @@ export function FeaturesCards() {
   }))
 
   const { classes, theme } = useStyles()
-  const features = mockdata.map((feature) => (
+  const features = data.map((feature) => (
     <Card
       key={feature.title}
       shadow="md"

@@ -1,11 +1,13 @@
 import { ActionIcon, Button, Flex, Select, Stack, Tooltip } from '@mantine/core'
 import Editor from '@monaco-editor/react'
 import { IconClipboardCopy } from '@tabler/icons-react'
+import { getSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import { AppLayout } from '~/components/layouts/AppLayout'
+import { useCurrentUserStore } from '~/store/currentUser'
 import { api } from '~/utils/api'
-import { programmingLanguageList } from '~/utils/constant'
+import { FREE_USAGE_LIMIT, programmingLanguageList } from '~/utils/constant'
 
 export default function AppIndex() {
   const [code, setCode] = useState('')
@@ -18,6 +20,9 @@ export default function AppIndex() {
     string | null
   >('typescript')
   const openaiImproveMutation = api.openai.improve.useMutation()
+  const { currentUser, setCurrentUser } = useCurrentUserStore()
+  if (!currentUser) return null
+  const overFreeUsage = FREE_USAGE_LIMIT <= currentUser?.freeUseCount
 
   const EDITOR_HEIGHT = 'calc(100vh - 250px)'
 
@@ -26,11 +31,13 @@ export default function AppIndex() {
     openaiImproveMutation.mutate(
       { code },
       {
-        onSuccess(data) {
+        async onSuccess(data) {
           setGeneratedCode(data.generatedCode)
+          const session = await getSession()
+          setCurrentUser(session?.user ?? null)
         },
         onError(e) {
-          alert('Code generation failed.')
+          alert(e.message ?? 'Code generation failed.')
           console.error(e)
         },
       }
@@ -105,7 +112,7 @@ export default function AppIndex() {
               {placeholder}
             </div>
           </div>
-          <Flex className="gap-3 p-4">
+          <Flex className="gap-3 p-4" align="center">
             <Select
               searchable
               value={programmingLanguageCode}
@@ -117,11 +124,14 @@ export default function AppIndex() {
             />
             <Button
               onClick={() => handleGenerate()}
-              disabled={openaiImproveMutation.isLoading || code === ''}
+              disabled={
+                openaiImproveMutation.isLoading || code === '' || overFreeUsage
+              }
               loading={openaiImproveMutation.isLoading}
             >
               {!openaiImproveMutation.isLoading ? 'Generate' : 'Generating...'}
             </Button>
+            {overFreeUsage && <div>Free usage limit reached.</div>}
           </Flex>
         </Stack>
         <Stack style={{ width: '49vw' }}>
@@ -134,6 +144,7 @@ export default function AppIndex() {
                     ? undefined
                     : 'blue'
                 }
+                withArrow
               >
                 <ActionIcon onClick={() => handleCopy(generatedCode)}>
                   <IconClipboardCopy />

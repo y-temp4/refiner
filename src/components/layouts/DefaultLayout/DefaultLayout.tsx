@@ -19,11 +19,6 @@ export const DefaultLayout = ({ children }: Props) => {
             Refiner
           </Link>
           <Group>
-            {!currentUser ? (
-              <Button onClick={() => signIn()}>Sign in</Button>
-            ) : (
-              <Button onClick={() => signOut()}>Sign out</Button>
-            )}
             {currentUser && (
               <Button
                 leftIcon={<IconApiApp />}
@@ -33,6 +28,11 @@ export const DefaultLayout = ({ children }: Props) => {
               >
                 Go to App
               </Button>
+            )}
+            {!currentUser ? (
+              <Button onClick={() => signIn()}>Sign in</Button>
+            ) : (
+              <Button onClick={() => signOut()}>Sign out</Button>
             )}
           </Group>
         </Group>

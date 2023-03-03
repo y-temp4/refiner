@@ -20,15 +20,14 @@ declare module 'next-auth' {
   interface Session extends DefaultSession {
     user: {
       id: string
-      // ...other properties
-      // role: UserRole;
+      freeUseCount: number
     } & DefaultSession['user']
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    // ...other properties
+    freeUseCount: number
+  }
 }
 
 /**
@@ -38,10 +37,13 @@ declare module 'next-auth' {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
+    // jwt: async (ctx) => {
+    //   return ctx.token
+    // },
     session({ session, user }) {
       if (session.user) {
         session.user.id = user.id
-        // session.user.role = user.role; <-- put other properties on the session here
+        session.user.freeUseCount = user.freeUseCount
       }
       return session
     },

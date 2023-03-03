@@ -87,3 +87,5 @@ export const programmingLanguageList = [
   { label: 'XML', code: 'xml' },
   { label: 'YAML', code: 'yaml' },
 ]
+
+export const FREE_USAGE_LIMIT = 3

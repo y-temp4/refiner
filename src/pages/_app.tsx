@@ -11,6 +11,7 @@ import { useEffect, useMemo } from 'react'
 
 import { DefaultLayout } from '~/components/layouts/DefaultLayout'
 import { useCurrentUser } from '~/hooks/useCurrentUser'
+import { useCurrentUserStore } from '~/store/currentUser'
 import { api } from '~/utils/api'
 
 type CustomNextPage = NextPage & {
@@ -40,17 +41,20 @@ const MyApp = ({
     const user = session?.user || null
     return user
   }
+  const store = useCurrentUserStore()
 
   useEffect(() => {
     async function init() {
       const currentUser = await getUser()
+      store.setCurrentUser(currentUser)
       const authedPath = '/app'
       if (pathname.startsWith(authedPath) && !currentUser) {
         push('/')
       }
     }
     init()
-  }, [pathname, push])
+    // eslint-disable-next-line
+  }, [pathname, push, store.setCurrentUser])
 
   return (
     <>

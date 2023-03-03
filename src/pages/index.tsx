@@ -14,7 +14,6 @@ import {
 } from '@mantine/core'
 import {
   IconBrandGithub,
-  IconBrandInstagram,
   IconBrandOpenSource,
   IconBrandTwitter,
   IconCookie,

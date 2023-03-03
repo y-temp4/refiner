@@ -1,17 +1,7 @@
-import {
-  AppShell,
-  Button,
-  Center,
-  Group,
-  Header,
-  Stack,
-  Text,
-  ThemeIcon,
-  Title,
-  useMantineTheme,
-} from '@mantine/core'
+import { AppShell, Button, Group, Header } from '@mantine/core'
+import { IconApiApp } from '@tabler/icons-react'
 import Link from 'next/link'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut } from 'next-auth/react'
 
 import { useCurrentUser } from '~/hooks/useCurrentUser'
 
@@ -25,9 +15,25 @@ export const DefaultLayout = ({ children }: Props) => {
     return (
       <Header height={60} px="md" className="p-4">
         <Group>
-          <Link href="/">Refiner</Link>
+          <Link href="/" className="text-xl font-bold text-white no-underline">
+            Refiner
+          </Link>
           <Group>
-            <Button onClick={() => signIn()}>Sign in</Button>
+            {!currentUser ? (
+              <Button onClick={() => signIn()}>Sign in</Button>
+            ) : (
+              <Button onClick={() => signOut()}>Sign out</Button>
+            )}
+            {currentUser && (
+              <Button
+                leftIcon={<IconApiApp />}
+                component={Link}
+                href="/app"
+                variant="white"
+              >
+                Go to App
+              </Button>
+            )}
           </Group>
         </Group>
       </Header>

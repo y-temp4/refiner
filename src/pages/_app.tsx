@@ -4,11 +4,13 @@ import { MantineProvider } from '@mantine/core'
 import type { NextPage } from 'next'
 import { type AppProps } from 'next/app'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { type Session } from 'next-auth'
-import { SessionProvider } from 'next-auth/react'
-import { useMemo } from 'react'
+import { getSession, SessionProvider } from 'next-auth/react'
+import { useEffect, useMemo } from 'react'
 
 import { DefaultLayout } from '~/components/layouts/DefaultLayout'
+import { useCurrentUser } from '~/hooks/useCurrentUser'
 import { api } from '~/utils/api'
 
 type CustomNextPage = NextPage & {
@@ -32,6 +34,23 @@ const MyApp = ({
       ((page: any) => <DefaultLayout>{page}</DefaultLayout>),
     [Component.getLayout]
   )
+  const { pathname, push } = useRouter()
+  async function getUser() {
+    const session = await getSession()
+    const user = session?.user || null
+    return user
+  }
+
+  useEffect(() => {
+    async function init() {
+      const currentUser = await getUser()
+      const authedPath = '/app'
+      if (pathname.startsWith(authedPath) && !currentUser) {
+        push('/')
+      }
+    }
+    init()
+  }, [pathname, push])
 
   return (
     <>

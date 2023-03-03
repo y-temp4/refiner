@@ -1,28 +1,30 @@
-# Create T3 App
+# Refiner
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+The open-source Refraction alternative.
 
-## What's next? How do I make an app with this?
+## Build with
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
-
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
-
+- [OpenAI GPT3 API](https://openai.com/product)
 - [Next.js](https://nextjs.org)
+- [tRPC](https://trpc.io)
 - [NextAuth.js](https://next-auth.js.org)
 - [Prisma](https://prisma.io)
+- [Mantine](https://mantine.dev)
 - [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
 
-## Learn More
+## Development
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+```sh
+# Clone the repo
+git clone https://github.com/y-temp4/refiner
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+# Go to the project folder
+cd refiner
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+# Install packages
+yarn
 
-## How do I deploy this?
-
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+# Set up .env files
+# Please setup github keys
+cp .env.sample .env
+```

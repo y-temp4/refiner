@@ -69,6 +69,11 @@ const MyApp = ({
           content="Improve your code with the power of AI."
         />
         <link rel="icon" href="/favicon.ico" />
+        <link
+          rel="apple-touch-icon"
+          sizes="180x180"
+          href="/apple-touch-icon.png"
+        />
         <meta
           property="og:image"
           content="https://refiner-production.onrender.com/ogp.png"

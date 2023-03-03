@@ -6,7 +6,7 @@
     "build": "next build",
     "dev": "next dev",
     "postinstall": "prisma generate",
-    "start": "next start",
+    "start": "next start -p $PORT",
     "lint": "SKIP_ENV_VALIDATION=false run-p -l -c --aggregate-output lint:*",
     "lint:eslint": "next lint",
     "lint:prettier": "prettier --check .",

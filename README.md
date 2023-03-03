@@ -22,7 +22,7 @@ Prerequisites:
 
 ```sh
 # Clone the repo
-y
+git clone https://github.com/y-temp4/refiner
 
 # Go to the project folder
 cd refiner

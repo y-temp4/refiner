@@ -88,4 +88,7 @@ export const programmingLanguageList = [
   { label: 'YAML', code: 'yaml' },
 ]
 
-export const FREE_USAGE_LIMIT = 3
+// FIXME:
+export const FREE_USAGE_LIMIT =
+  process.env.NODE_ENV === 'development' ? 10000 : 3
+export const MAX_CODE_PROMPT_TOKEN_COUNT = 3000

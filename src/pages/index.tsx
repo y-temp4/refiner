@@ -254,7 +254,7 @@ function HeroText() {
 
         <Container p={0} size={600}>
           <Text size="lg" color="dimmed" className={classes.description}>
-            {`Let's use AI to improve the quality of your code.`}
+            {`Let's use Refiner to improve the quality of your code.`}
           </Text>
         </Container>
 

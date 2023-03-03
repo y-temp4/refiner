@@ -64,6 +64,10 @@ const MyApp = ({
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"
         />
+        <meta
+          name="description"
+          content="Improve your code with the power of AI."
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <SessionProvider session={session}>

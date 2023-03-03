@@ -14,6 +14,12 @@ The open-source Refraction alternative.
 
 ## Development
 
+Prerequisites:
+
+- Node.js
+- Docker
+- Yarn
+
 ```sh
 # Clone the repo
 y
@@ -27,6 +33,10 @@ yarn
 # Set up .env files
 # Please setup github keys and OpenAPI keys
 cp .env.sample .env
+
+# Set up DB
+docker compose up
+yarn prisma db push
 
 # Start dev server
 yarn dev

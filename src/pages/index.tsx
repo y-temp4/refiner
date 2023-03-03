@@ -1,4 +1,6 @@
 import {
+  ActionIcon,
+  Anchor,
   Badge,
   Button,
   Card,
@@ -11,7 +13,10 @@ import {
   Title,
 } from '@mantine/core'
 import {
+  IconBrandGithub,
+  IconBrandInstagram,
   IconBrandOpenSource,
+  IconBrandTwitter,
   IconCookie,
   IconCreditCardOff,
   IconGauge,
@@ -19,6 +24,7 @@ import {
 } from '@tabler/icons-react'
 import { type NextPage } from 'next'
 import Head from 'next/head'
+import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 
 import { api } from '~/utils/api'
@@ -403,6 +409,94 @@ export function FeaturesCards() {
   )
 }
 
+interface FooterCenteredProps {
+  links: { link: string; label: string }[]
+}
+
+function FooterCentered({ links }: FooterCenteredProps) {
+  const useStyles = createStyles((theme) => ({
+    footer: {
+      marginTop: rem(120),
+      paddingBottom: rem(20),
+      // borderTop: `${rem(1)} solid ${
+      //   theme.colorScheme === 'dark'
+      //     ? theme.colors.dark[5]
+      //     : theme.colors.gray[2]
+      // }`,
+    },
+
+    inner: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: `${theme.spacing.md} ${theme.spacing.md}`,
+
+      [theme.fn.smallerThan('sm')]: {
+        flexDirection: 'column',
+      },
+    },
+
+    links: {
+      [theme.fn.smallerThan('sm')]: {
+        marginTop: theme.spacing.lg,
+        marginBottom: theme.spacing.sm,
+      },
+    },
+  }))
+
+  const { classes } = useStyles()
+  const items = links.map((link) => (
+    <Anchor
+      color="dimmed"
+      key={link.label}
+      href={link.link}
+      sx={{ lineHeight: 1 }}
+      target="_blank"
+      rel="noopener noreferrer"
+      size="sm"
+    >
+      {link.label}
+    </Anchor>
+  ))
+
+  return (
+    <div className={classes.footer}>
+      <div className={classes.inner}>
+        <Link href="/" className="text-xl font-bold text-white no-underline">
+          Refiner
+        </Link>
+
+        <Group className={classes.links}>{items}</Group>
+
+        <Group spacing="xs" position="right" noWrap>
+          <ActionIcon
+            size="lg"
+            variant="default"
+            radius="xl"
+            component="a"
+            href="https://twitter.com/refiner_dev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconBrandTwitter size="1.05rem" stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon
+            size="lg"
+            variant="default"
+            radius="xl"
+            component="a"
+            href="https://github.com/y-temp4/refiner"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <IconBrandGithub size="1.05rem" stroke={1.5} />
+          </ActionIcon>
+        </Group>
+      </div>
+    </div>
+  )
+}
+
 const Home: NextPage = () => {
   return (
     <>
@@ -418,6 +512,20 @@ const Home: NextPage = () => {
         <Button size="lg" onClick={() => signIn()} className="my-10">
           {`Let's generate code with AI`}
         </Button>
+        <div className="w-full" style={{ maxWidth: 1108 }}>
+          <FooterCentered
+            links={[
+              {
+                label: 'Terms',
+                link: 'https://yt4.notion.site/1f2ea87ac6e94ee6a1bbc8b3df57104e',
+              },
+              {
+                label: 'Privacy',
+                link: 'https://yt4.notion.site/1d14693cf5244ecdb09b55347d3127f5',
+              },
+            ]}
+          />
+        </div>
       </main>
     </>
   )

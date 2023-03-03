@@ -224,7 +224,11 @@ export default function AppIndex() {
           <IconQuestionCircle />
           <Text fz="sm">
             Did something go wrong, please report it in{' '}
-            <a href="https://github.com/y-temp4/refiner/issues" target="_blank">
+            <a
+              href="https://github.com/y-temp4/refiner/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Issues on GitHub
             </a>
             .

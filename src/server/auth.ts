@@ -47,6 +47,9 @@ export const authOptions: NextAuthOptions = {
       }
       return session
     },
+    redirect({ baseUrl }) {
+      return `${baseUrl}/app`
+    },
   },
   adapter: PrismaAdapter(prisma),
   providers: [

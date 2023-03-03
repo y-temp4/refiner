@@ -69,6 +69,11 @@ const MyApp = ({
           content="Improve your code with the power of AI."
         />
         <link rel="icon" href="/favicon.ico" />
+        <meta
+          property="og:image"
+          content="https://refiner-production.onrender.com/ogp.png"
+        />
+        <meta content="summary_large_image" name="twitter:card" />
       </Head>
       <SessionProvider session={session}>
         <MantineProvider

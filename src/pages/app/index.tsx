@@ -18,6 +18,9 @@ export default function AppIndex() {
     string | null
   >('typescript')
   const openaiImproveMutation = api.openai.improve.useMutation()
+
+  const EDITOR_HEIGHT = 'calc(100vh - 250px)'
+
   async function handleGenerate() {
     if (!code) return
     openaiImproveMutation.mutate(
@@ -51,24 +54,57 @@ export default function AppIndex() {
     await new Promise((resolve) => setTimeout(resolve, 1500))
     setCopyTooltipLabel(defaultCopyTooltipLabel)
   }
-  const EDITOR_HEIGHT = 'calc(100vh - 250px)'
+  const placeholder = `// Please write your code here.`
+  const handleEditorOnChange = (value: string | undefined) => {
+    setCode(value ?? '')
+    const placeholderElement = document.querySelector(
+      '.monaco-placeholder'
+    ) as HTMLElement | null
+    if (!placeholderElement) return
+    placeholderElement.style.display = !value ? 'block' : 'none'
+  }
+  const handleEditorOnMount = () => {
+    const placeholderElement = document.querySelector(
+      '.monaco-placeholder'
+    ) as HTMLElement | null
+    if (!placeholderElement) return
+    placeholderElement.style.display = 'block'
+  }
+
   return (
     <div>
       <Flex>
         <Stack style={{ width: '49vw' }}>
           <div className="h-8"></div>
-          <Editor
-            height={EDITOR_HEIGHT}
-            language={programmingLanguageCode ?? ''}
-            value={code}
-            defaultValue=""
-            theme="vs-dark"
-            onChange={(v) => {
-              console.log(v)
-              setCode(v ?? '')
-            }}
-            options={{ wordWrap: 'on' }}
-          />
+          <div style={{ position: 'relative' }}>
+            <Editor
+              height={EDITOR_HEIGHT}
+              language={programmingLanguageCode ?? ''}
+              value={code}
+              defaultValue=""
+              theme="vs-dark"
+              onChange={handleEditorOnChange}
+              options={{ wordWrap: 'on' }}
+              onMount={handleEditorOnMount}
+            />
+            <div
+              className="monaco-placeholder"
+              style={{
+                position: 'absolute',
+                display: 'none',
+                whiteSpace: 'pre-wrap',
+                top: 0,
+                left: 65,
+                color: 'white',
+                pointerEvents: 'none',
+                userSelect: 'none',
+                fontFamily: `Menlo, Monaco, "Courier New", monospace`,
+                fontSize: 12,
+              }}
+            >
+              {placeholder}
+            </div>
+          </div>
           <Flex className="gap-3 p-4">
             <Select
               searchable

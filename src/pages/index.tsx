@@ -23,11 +23,8 @@ import {
   IconUser,
 } from '@tabler/icons-react'
 import { type NextPage } from 'next'
-import Head from 'next/head'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
-
-import { api } from '~/utils/api'
 
 interface DotsProps extends React.ComponentPropsWithoutRef<'svg'> {
   size?: number
@@ -503,11 +500,12 @@ const Home: NextPage = () => {
       <main className="flex min-h-screen flex-col items-center justify-center">
         <HeroText />
         <FeaturesCards />
-        <Text c="dimmed" ta="center" mt="md">
+        <Text c="dimmed" ta="center" mt="md" px="md">
           Refiner is currently in alpha version. Please note that there is a
           limit to the number of registered users. <br />
-          Please also note that there may be disruptive changes to the service
-          specifications.
+          Please also note that there is a possibility that the specifications
+          of the service may be substantially changed or <br />
+          the data of registered user accounts may be erased.
         </Text>
         <Button size="lg" onClick={() => signIn()} className="my-10">
           {`Let's generate code with AI`}

@@ -59,7 +59,7 @@ const MyApp = ({
   return (
     <>
       <Head>
-        <title>Refiner</title>
+        <title>Refiner - AI-based code refactoring service</title>
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width"

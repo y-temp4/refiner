@@ -26,7 +26,7 @@ export const DefaultLayout = ({ children }: Props) => {
         <Button onClick={() => signOut()}>Sign out</Button>
       </>
     ) : (
-      <Button onClick={() => signIn()}>Sign in</Button>
+      <Button onClick={() => signIn('github')}>Sign in</Button>
     )
   }
   const AppHeader = () => {

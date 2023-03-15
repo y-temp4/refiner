@@ -272,7 +272,7 @@ function HeroText() {
           <Button
             className={classes.control}
             size="lg"
-            onClick={() => signIn()}
+            onClick={() => signIn('github')}
           >
             Get started
           </Button>
@@ -520,7 +520,7 @@ const Home: NextPage = () => {
           of the service may be substantially changed or <br />
           the data of registered user accounts may be erased.
         </Text>
-        <Button size="lg" onClick={() => signIn()} className="my-10">
+        <Button size="lg" onClick={() => signIn('github')} className="my-10">
           {`Let's generate code with AI`}
         </Button>
         <div className="w-full" style={{ maxWidth: 1108 }}>

@@ -12,7 +12,7 @@ type Props = {
 export const DefaultLayout = ({ children }: Props) => {
   const { currentUser, status } = useCurrentUser()
   const HeaderItems = () => {
-    if (status === 'loading') return <Loader />
+    if (status === 'loading') return <Loader variant="dots" />
     return currentUser ? (
       <>
         <Button

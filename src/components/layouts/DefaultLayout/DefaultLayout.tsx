@@ -1,4 +1,4 @@
-import { AppShell, Button, Group, Header } from '@mantine/core'
+import { AppShell, Button, Group, Header, Loader } from '@mantine/core'
 import { IconApiApp } from '@tabler/icons-react'
 import Link from 'next/link'
 import { signIn, signOut } from 'next-auth/react'
@@ -10,7 +10,25 @@ type Props = {
 }
 
 export const DefaultLayout = ({ children }: Props) => {
-  const { currentUser } = useCurrentUser()
+  const { currentUser, status } = useCurrentUser()
+  const HeaderItems = () => {
+    if (status === 'loading') return <Loader />
+    return currentUser ? (
+      <>
+        <Button
+          leftIcon={<IconApiApp />}
+          component={Link}
+          href="/app"
+          variant="white"
+        >
+          Go to App
+        </Button>
+        <Button onClick={() => signOut()}>Sign out</Button>
+      </>
+    ) : (
+      <Button onClick={() => signIn()}>Sign in</Button>
+    )
+  }
   const AppHeader = () => {
     return (
       <Header height={60} className="flex justify-center px-4">
@@ -19,21 +37,7 @@ export const DefaultLayout = ({ children }: Props) => {
             Refiner
           </Link>
           <Group>
-            {currentUser && (
-              <Button
-                leftIcon={<IconApiApp />}
-                component={Link}
-                href="/app"
-                variant="white"
-              >
-                Go to App
-              </Button>
-            )}
-            {!currentUser ? (
-              <Button onClick={() => signIn()}>Sign in</Button>
-            ) : (
-              <Button onClick={() => signOut()}>Sign out</Button>
-            )}
+            <HeaderItems />
           </Group>
         </Group>
       </Header>
